@@ -1,12 +1,11 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import { HomeProps } from "../sources/typs";
 
-function Home() {
+export default function Home({ route, navigation }:HomeProps) {
   return (
     <View>
-      <Text>Home</Text>
+      <Text onPress={() => navigation.push('Chat')}>Chat</Text>
+      <Text onPress={() => navigation.push('Login')}>Login</Text>
     </View>
   )
 }
-
-export default Home;

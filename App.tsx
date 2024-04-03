@@ -1,12 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { RootStackParamList } from './sources/typs';
+
+import Home from './screens/Home';
+import Login from './screens/Login';
+import Chat from './screens/Chat';
+import Signup from './screens/Signup';
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+function ChatStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name='Chat' component={Chat} />
+      <Stack.Screen name='Login' component={Login} />
+    </Stack.Navigator>
+  );
+}
+
+function AuthStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      
+      <Stack.Screen name='Signup' component={Signup} />
+    </Stack.Navigator>
+  );
+}
+
+function RootNavigator() {
+
+  return(
+    <NavigationContainer>
+      <ChatStack />
+    </NavigationContainer>
+  );
+}
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-rose-200">
-      <Text className="text-2xl font-bold px-10">Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RootNavigator />
   );
 }
 
