@@ -2,7 +2,6 @@ import { useState } from "react";
 import { 
     Text, 
     View, 
-    Button, 
     TextInput, 
     Image, 
     SafeAreaView, 
@@ -12,7 +11,7 @@ import {
 } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { LoginProps } from "../sources/typs";
+import { LoginProps } from "../sources/NavigationTypes";
 const backImage = require("../assets/background.png");
 
 export default function Login({ route, navigation }:LoginProps) {
@@ -54,7 +53,7 @@ export default function Login({ route, navigation }:LoginProps) {
           onChangeText={(text) => setPassword(text)}
         />
         <TouchableOpacity className={style.button} onPress={onHandleLogin}>
-          <Text style={{fontWeight: 'bold', color: '#fff', fontSize: 18}}> Log In</Text>
+          <Text className="text-lg font-bold text-white"> Log In</Text>
         </TouchableOpacity>
         <View className="mt-5 flex-row items-center self-center" >
           <Text className="text-slate-400 font-semibold text-sm" >Don't have an account? </Text>

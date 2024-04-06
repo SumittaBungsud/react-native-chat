@@ -1,7 +1,7 @@
 import { View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { RootStackParamList } from './sources/typs';
+import { RootStackParamList } from './sources/NavigationTypes';
 
 import Home from './screens/Home';
 import Login from './screens/Login';
