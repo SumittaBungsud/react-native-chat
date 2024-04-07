@@ -1,6 +1,11 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
+export type AsyncStoreUser = {
+  email: string;
+  password: string;
+};
+
 export type RootStackParamList = {
     Home: undefined;
     Login: undefined;
