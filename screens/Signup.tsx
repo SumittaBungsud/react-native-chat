@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -9,25 +9,29 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
-import { SignupProps, AsyncStoreUser } from "../sources/Types";
+import { SignupProps, AuthPropsContext, AsyncStoreUser } from "../sources/Types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthenticatedUserContext } from "../sources/AuthContext";
+import { auth } from "../appconfig/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 const backImage = require("../assets/background.png");
 
 export default function Signup({ route, navigation }: SignupProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const currentUser: AsyncStoreUser = {
-    email,
-    password,
+  const storeUser: AsyncStoreUser = {
+    email: email,
+    password: password,
   };
 
-  const onHandleSignup = () => {
+  const onHandleSignup = async () => {
     if (email !== "" && password !== "") {
-      createUserWithEmailAndPassword(auth, email, password)
+      await createUserWithEmailAndPassword(auth, email, password)
         .then(async () => {
-          await AsyncStorage.setItem("user", JSON.stringify(currentUser));
+          await AsyncStorage.setItem("user", JSON.stringify(storeUser));
+          setEmail("");
+          setPassword("");
           console.log("Signup success");
         })
         .catch((err) => Alert.alert("Login error", err.message));
@@ -77,6 +81,7 @@ export default function Signup({ route, navigation }: SignupProps) {
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
     </View>
+    // <Text>Sign up</Text>
   );
 }
 
@@ -87,5 +92,5 @@ const style = {
   title: "text-4xl text-orange-400 font-bold self-center pb-6",
   bgimg: "w-full h-80 absolute top-0 bg-top",
   button: "bg-[#f57c00] h-14 rounded-lg mt-10 justify-center items-center",
-  whiteSheet: "w-full h-3/4 absolute bottom-0 bg-white rounded-tl-[2rem]",
+  whiteSheet: "w-full h-3/4 absolute bottom-0 bg-white rounded-tl-[100px]",
 };

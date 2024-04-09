@@ -1,4 +1,3 @@
-// import 'dotenv/config';
 
 export default{
   "expo": {
@@ -22,19 +21,11 @@ export default{
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    // extra: {
-    //   apiKey: process.env.API_KEY,
-    //   authDomain: process.env.AUTH_DOMAIN,
-    //   projectId: process.env.PROJECT_ID,
-    //   storageBucket: process.env.STORAGE_BUCKET,
-    //   messagingSenderId: process.env.MESSAGING_SENDER,
-    //   appId: process.env.APP_ID
-    // }
   }
 }

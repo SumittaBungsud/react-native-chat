@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -9,25 +9,32 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
 import { LoginProps, AsyncStoreUser } from "../sources/Types";
+import { AuthPropsContext } from "../sources/Types";
+import { AuthenticatedUserContext } from "../sources/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { auth } from "../appconfig/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 const backImage = require("../assets/background.png");
 
 export default function Login({ route, navigation }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const currentUser: AsyncStoreUser = {
-    email,
-    password,
+  const { user, setUser } = useContext(
+    AuthenticatedUserContext
+  ) as AuthPropsContext;
+  const storeUser: AsyncStoreUser = {
+    email: email,
+    password: password,
   };
 
   const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(async () => {
-          await AsyncStorage.setItem("user", JSON.stringify(currentUser));
+      await signInWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+          await AsyncStorage.setItem("user", JSON.stringify(storeUser));
+          setEmail("");
+          setPassword("");
           console.log("Login success");
         })
         .catch((err) => Alert.alert("Login error", err.message));
@@ -77,6 +84,7 @@ export default function Login({ route, navigation }: LoginProps) {
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
     </View>
+    // <Text>Login</Text>
   );
 }
 
@@ -87,5 +95,5 @@ const style = {
   title: "text-4xl text-orange-400 font-bold self-center pb-6",
   bgimg: "w-full h-80 absolute top-0 bg-top",
   button: "bg-[#f57c00] h-14 rounded-lg mt-10 justify-center items-center",
-  whiteSheet: "w-full h-3/4 absolute bottom-0 bg-white rounded-tl-[2rem]",
+  whiteSheet: "w-full h-3/4 absolute bottom-0 bg-white rounded-tl-[100px]",
 };

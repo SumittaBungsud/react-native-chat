@@ -16,7 +16,7 @@ export default function Home() {
           name="search"
           size={24}
           color={colors.gray}
-          className="text-2xl ml-4"
+          style={{marginStart: 15}}
         />
       ),
       headerRight: () => (
@@ -38,7 +38,7 @@ export default function Home() {
 }
 
 const style = {
-  container: "flex-1 justify-center items-center bg-rose-200",
+  container: "flex-1 space-y-20 justify-center items-center bg-rose-200",
   img: "w-10 h-10 mr-4",
   chatButton:
     "w-[3.2rem] h-[3.2rem] mr-5 mb-[3.2rem] rounded-3xl justify-center items-center shadow-[0_0.1rem_0.4rem_rgba(0, 0, 0)] shadow-orange-500/90",
