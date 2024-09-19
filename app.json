@@ -1,5 +1,4 @@
-
-export default{
+{
   "expo": {
     "name": "react-native-chat",
     "slug": "react-native-chat",
@@ -19,13 +18,15 @@ export default{
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-      }
+      "package": "com.yourcompany.yourappname"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "extra": {
+      "eas": {
+        "projectId": "2ac5b4fd-5389-4706-8a48-73b4a70cf166"
+      }
+    }
   }
 }

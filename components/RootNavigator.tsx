@@ -28,7 +28,7 @@ function ChatStack() {
 
 function AuthStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
     </Stack.Navigator>
@@ -64,12 +64,12 @@ export default function RootNavigator() {
     return unsubscribeAuth;
   }, [user]);
 
-  const screensSelect = () => user ? <ChatStack /> : <AuthStack />;
+  const screensSelect = user ? <ChatStack /> : <AuthStack />;
 
   return (
     <AuthenticatedUserProvider>
       <NavigationContainer>
-        {screensSelect()}
+        {screensSelect}
       </NavigationContainer>
     </AuthenticatedUserProvider>
   );
